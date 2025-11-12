@@ -20,3 +20,32 @@ arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -d 5 test.wav
 aplay test.wav  # (TigerVNC로는 소리 전송X, Pi에 꽂은 이어폰/스피커로 확인)
 # VNC 오디오 미지원은 관련 이슈/스레드에서 다수 확인됨
 #   :contentReference[oaicite:10]{index=10}
+
+
+
+
+
+========아래는 민성 선배가 카톡에 보내준 내용 읽을 필요 x 부연설명임========
+매번 새 터미널을 열면 먼저 활성화:
+source ~/venvs/noise/bin/activate
+
+Rebooting-- 
+arecord -I
+arecord -L
+
+arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -vv /dev/null
+
+stereo state check
+arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -V stereo -d 0  /dev/null
+
+
+새로운 코드를 작성해보고 싶다?
+1.바탕화면 오른쪽 클릭-새파일-(이름).py
+2.코드 작성 후 ctrl+s
+[매번 새 터미널을 열면 먼저 활성화:코드 test 하고싶다면]
+3. 터미널 열고, source ~/venvs/noise/bin/activate 
+4. 바탕화면 경로  cd /home/msg22112157/Desktop 이동
+5. python (이름).py
+6. 하면 해당 코드 실행될 것임. 강제 종료는  ctrl + c
+
+라즈빈OS 에서 복사붙여 넣기 가능하니깐 마우스 적극 사용할 것
