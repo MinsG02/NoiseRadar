@@ -10,7 +10,7 @@ source myenv/bin/activate
 
 (myenv) jew22121093@raspberrypi:~ $
 
-3) 필요한 패키지 설치
+3) 필요한 패키지 설치(첫 설치 이후 생략 ㄱㄴ)
 pip install sounddevice numpy scipy
 
 4) Desktop으로 이동 후 실행
