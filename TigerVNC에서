@@ -6,7 +6,7 @@ arecord -L
 arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
 위에는 2mic
 
-left만 연결한 1mic는 다음과 같음
+raspi5 (jew22212093 ver)
 arecord -D hw:1,0 -c 2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
 
 # 3) 레벨이 안 뜨면 캡처 활성화/게인 조절
