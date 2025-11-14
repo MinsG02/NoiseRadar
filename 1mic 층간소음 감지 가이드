@@ -1,0 +1,18 @@
+1. 가상환경 만들기:
+
+python3 -m venv myenv
+
+2) 가상환경 활성화
+source myenv/bin/activate
+
+
+프롬프트가 이렇게 바뀌면 성공:
+
+(myenv) jew22121093@raspberrypi:~ $
+
+3) 필요한 패키지 설치
+pip install sounddevice numpy scipy
+
+4) Desktop으로 이동 후 실행
+cd ~/Desktop
+python3 floor_noise_mointor.py
