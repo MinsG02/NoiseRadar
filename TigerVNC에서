@@ -1,0 +1,57 @@
+# 1) 재부팅 후 장치 확인 (소문자 L / 대문자 L)
+arecord -l
+arecord -L
+
+# 2) 입력 레벨 모니터링 (스테레오 VU, 무한 실행: Ctrl+C로 중지)
+arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
+위에는 2mic
+
+raspi5 (jew22212093 ver// hw:1,0에서 왼쪽은 하드웨어 번호고 오른쪽은 디바이스 번호임)
+arecord -D hw:2,0 -c 2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
+아래는 1mic
+arecord -D hw:2,0 -c2 -r 48000 -f S32_LE -vv /dev/null
+
+# 3) 레벨이 안 뜨면 캡처 활성화/게인 조절
+alsamixer  # F6 카드선택 → F4 Capture → 스페이스(캡처 on), ↑↓(게인), M(음소거)
+# (alsamixer 조작 키는 공식 매뉴얼에 안내)  [참고: 위 키 안내 출처]
+#                                                    :contentReference[oaicite:9]{index=9}
+
+# 4) 코드 테스트
+source ~/venvs/noise/bin/activate
+cd /home/msg22112157/Desktop
+python 파일이름.py
+
+# 5) 녹음 파일 검증
+arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -d 5 test.wav
+aplay test.wav  # (TigerVNC로는 소리 전송X, Pi에 꽂은 이어폰/스피커로 확인)
+# VNC 오디오 미지원은 관련 이슈/스레드에서 다수 확인됨
+#   :contentReference[oaicite:10]{index=10}
+
+
+
+
+
+========아래는 민성 선배가 카톡에 보내준 내용 읽을 필요 x 부연설명임========
+매번 새 터미널을 열면 먼저 활성화:
+source ~/venvs/noise/bin/activate
+
+Rebooting-- 
+arecord -I
+arecord -L
+
+arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -vv /dev/null
+
+stereo state check
+arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -V stereo -d 0  /dev/null
+
+
+새로운 코드를 작성해보고 싶다?
+1.바탕화면 오른쪽 클릭-새파일-(이름).py
+2.코드 작성 후 ctrl+s
+[매번 새 터미널을 열면 먼저 활성화:코드 test 하고싶다면]
+3. 터미널 열고, source ~/venvs/noise/bin/activate 
+4. 바탕화면 경로  cd /home/msg22112157/Desktop 이동
+5. python (이름).py
+6. 하면 해당 코드 실행될 것임. 강제 종료는  ctrl + c
+
+라즈빈OS 에서 복사붙여 넣기 가능하니깐 마우스 적극 사용할 것
