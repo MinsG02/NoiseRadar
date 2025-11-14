@@ -1,6 +1,6 @@
 0.입력레벨 모델링
 arecord -l
-arecord -D hw:1,0 -c2 -r 48000 -f S32_LE -vv /dev/null
+arecord -D hw:2,0 -c2 -r 48000 -f S32_LE -vv /dev/null
 
 1. 가상환경 만들기:
 
