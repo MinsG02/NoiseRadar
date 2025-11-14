@@ -1,3 +1,4 @@
+# 노트북 1mic 마이크로 진행
 # 의도 : 특정 dB이상 넘어가면 webhook 사이트로 소음 발생했음을 전송함
 #사용한 사이트 : https://webhook.site/#!/view/d8f3e6b4-a8fc-4d1c-8e48-2bec7c66cb0e/7e35abf8-1ca5-4e2f-a6c9-ac4713aa761c/1
 #사용한 명령어
