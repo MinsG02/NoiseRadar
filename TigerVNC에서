@@ -4,7 +4,10 @@ arecord -L
 
 # 2) 입력 레벨 모니터링 (스테레오 VU, 무한 실행: Ctrl+C로 중지)
 arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
-//sterio만 제거하면 1mic임
+위에는 2mic
+
+left만 연결한 1mic는 다음과 같음
+arecord -D hw:1,0 -c 2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
 
 # 3) 레벨이 안 뜨면 캡처 활성화/게인 조절
 alsamixer  # F6 카드선택 → F4 Capture → 스페이스(캡처 on), ↑↓(게인), M(음소거)
