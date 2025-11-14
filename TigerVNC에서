@@ -8,6 +8,8 @@ arecord -D hw:3,0 -c2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
 
 raspi5 (jew22212093 ver)
 arecord -D hw:1,0 -c 2 -r 48000 -f S32_LE -V stereo -d 0 /dev/null
+아래는 1mic
+arecord -D hw:1,0 -c2 -r 48000 -f S32_LE -vv /dev/null
 
 # 3) 레벨이 안 뜨면 캡처 활성화/게인 조절
 alsamixer  # F6 카드선택 → F4 Capture → 스페이스(캡처 on), ↑↓(게인), M(음소거)
