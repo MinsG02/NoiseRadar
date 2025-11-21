@@ -5,7 +5,7 @@ import datetime   # ← 핵심 수정 (모듈 전체 import)
 from scipy.signal import butter, lfilter
 
 # === 보정값 (너 환경 기준) ===
-DBFS_TO_DBA_OFFSET = 72 # -50 + 72 → 22 dBA
+DBFS_TO_DBA_OFFSET = 90 # -50 + 72(DBFS_TO_DBA_OFFSET) → 22 dBA
 
 FS = 48000
 CHUNK = 256
@@ -16,6 +16,9 @@ b, a = butter(4, [40/(FS/2), 250/(FS/2)], btype='band')
 dbfs_current = -100.0
 last_event_time = 0
 event_log = []
+
+# ★ 추가: 마지막 이벤트 처리시간(ms)
+last_rt_process_ms = 0.0
 
 
 # ===== 주간/야간 층간소음 기준 가져오기 =====
@@ -69,7 +72,10 @@ with stream:
         if dba >= legal_th:
             print("⚠⚠  층간소음 기준 초과! (법적 기준 위반 가능) ⚠⚠")
 
+            # ★ 추가: 실제 이벤트 처리시간(판정~로그/출력) 측정
             if time.time() - last_event_time > 1:
+                t0 = time.perf_counter()
+
                 timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 event_log.append(
                     f"{timestamp} | {dba:.1f} dBA | 기준 {legal_th} dBA 초과"
@@ -78,8 +84,13 @@ with stream:
 
                 if len(event_log) > 20:
                     event_log.pop(0)
+
+                last_rt_process_ms = (time.perf_counter() - t0) * 1000.0
         else:
             print("(정상 소음 수준)")
+
+        # ★ 추가: 실시간 이벤트 처리시간 출력
+        print(f"\n[RT] 이벤트 처리시간(판정~로그/출력): {last_rt_process_ms:5.2f} ms")
 
         # ===== 이벤트 로그 출력 =====
         print("\n=== 이벤트 로그 (최근 20개) ===")
