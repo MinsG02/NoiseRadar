@@ -20,3 +20,28 @@ pip install sounddevice numpy scipy
 4) Desktop으로 이동 후 실행
 cd ~/Desktop
 python3 floor_noise_mointor.py
+
+==================낮과 밤================
++만약 NTP 동기화가 켜져 있다면 (자동으로 다시 바뀌는 경우)
+자동 시간 동기화를 잠시 끄고 수동으로 고정하려면:
+sudo timedatectl set-ntp false
+
+이후 다시 켜려면:
+sudo timedatectl set-ntp true
+
++예: 지금 바로 “밤 11시로 변경”하려면
+sudo timedatectl set-ntp false
+sudo date -s "23:00:00"
+sudo hwclock -w
+
++ 타임존이 잘못된 경우 (한국 시간 기준)
+혹시 date 명령 결과가 KST가 아닌 다른 지역이면 다음으로 설정:
+sudo timedatectl set-timezone Asia/Seoul
+
+필요한 목표가
+
+“밤 시간(22시~06시) 으로 자동 분류되는 테스트를 위해 강제로 밤으로 바꾸는 것”
+이라면 아래처럼 간단히:
+
+sudo timedatectl set-ntp false
+sudo date -s "23:30:00"
